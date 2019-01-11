@@ -15,7 +15,7 @@ source:
     - 72c8e9acd1a28c501b2bcb2306b8f242b5b73fb6.patch
 
 build:
-  number: 1000
+  number: 2000
   skip: true  # [win]
   skip: true  # [c_compiler == "toolchain_c" and linux]
 

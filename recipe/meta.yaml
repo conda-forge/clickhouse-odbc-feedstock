@@ -1,13 +1,13 @@
 {% set name = "clickhouse-odbc" %}
-{% set version = "1.0.0.20181017" %}
+{% set version = "2018-09-03" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/yandex/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 73a5ef6ec8ab9b09b45965cec387daed06a4999a84e7f234bb03a78f6accd346
+  url: https://github.com/yandex/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 3548abce46371c27811142974987ee2226d180faec605c693465157f664e79a2
   patches:
     # https://github.com/yandex/clickhouse-odbc/pull/150
     - cac38224ae9ac657c80f56410e701b1509d03333.patch
@@ -15,7 +15,7 @@ source:
     - 72c8e9acd1a28c501b2bcb2306b8f242b5b73fb6.patch
 
 build:
-  number: 2002
+  number: 0
   skip: true  # [win]
   skip: true  # [c_compiler == "toolchain_c" and linux]
 

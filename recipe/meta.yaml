@@ -15,7 +15,7 @@ source:
     - 72c8e9acd1a28c501b2bcb2306b8f242b5b73fb6.patch
 
 build:
-  number: 2004
+  number: 2005
   skip: true  # [win]
 
 requirements:
@@ -38,8 +38,6 @@ test:
   commands:
     - test -f $PREFIX/lib/odbc/libclickhouseodbc${SHLIB_EXT}  # [unix]
     - test -f $PREFIX/lib/odbc/libclickhouseodbcw${SHLIB_EXT}  # [unix]
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: https://github.com/yandex/clickhouse-odbc

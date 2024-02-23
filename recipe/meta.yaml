@@ -8,11 +8,6 @@ package:
 source:
   url: https://github.com/yandex/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: ca8666cbc7af9e5d4670cd05c9515152c34543e4f45e2bc8fa94bee90d724f1b
-  patches:
-    # https://github.com/yandex/clickhouse-odbc/pull/150
-    - cac38224ae9ac657c80f56410e701b1509d03333.patch
-    # This patch is already merged in master
-    - 72c8e9acd1a28c501b2bcb2306b8f242b5b73fb6.patch
 
 build:
   number: 0

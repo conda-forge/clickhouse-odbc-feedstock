@@ -1,6 +1,10 @@
 mkdir build
 pushd build
 
+if [[ "${target_platform}" == osx-* ]]; then
+    export CXXFLAGS="$CXXFLAGS -D_LIBCPP_DISABLE_AVAILABILITY"
+fi
+
 cmake ${CMAKE_ARGS} \
     -DCMAKE_BUILD_TYPE=release \
     -DBUILD_TESTING=OFF \

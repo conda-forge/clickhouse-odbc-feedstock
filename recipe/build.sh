@@ -1,4 +1,8 @@
-mkdir build
+#!/bin/bash
+
+set -euxo pipefail
+
+mkdir -p build
 pushd build
 
 if [[ "${target_platform}" == osx-* ]]; then
@@ -7,6 +11,9 @@ fi
 
 cmake ${CMAKE_ARGS} \
     -DCMAKE_BUILD_TYPE=release \
+    -DODBC_UNIXODBC_SKIP_BREW=ON \
+    -DODBC_SKIP_CONFIG_SCRIPT=ON \
+    -DODBC_UNIXODBC_DIR=$PREFIX \
     -DBUILD_TESTING=OFF \
     -DOPENSSL_ROOT_DIR=$PREFIX \
     -DOPENSSL_USE_SHARED_LIBS=ON \

@@ -1,0 +1,29 @@
+From 30a34fc09995b35ac80da4f152da80479547f563 Mon Sep 17 00:00:00 2001
+From: "Uwe L. Korn" <uwe.korn@quantco.com>
+Date: Mon, 26 Feb 2024 17:01:13 +0100
+Subject: [PATCH] Add missing path suffixes
+
+---
+ cmake/Modules/FindUnixODBC.cmake | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/cmake/Modules/FindUnixODBC.cmake b/cmake/Modules/FindUnixODBC.cmake
+index 8914a58..7af2012 100644
+--- a/cmake/Modules/FindUnixODBC.cmake
++++ b/cmake/Modules/FindUnixODBC.cmake
+@@ -274,6 +274,7 @@ if (NOT ODBC_UNIXODBC_FOUND AND NOT ODBC_UNIXODBC_CONFIG_SCRIPT)
+                 find_path (_path
+                     NAMES "${_file}"
+                     PATHS "${ODBC_UNIXODBC_DIR}"
++                    PATH_SUFFIXES "include"
+                     NO_DEFAULT_PATH
+                 )
+             else ()
+@@ -312,6 +313,7 @@ if (NOT ODBC_UNIXODBC_FOUND AND NOT ODBC_UNIXODBC_CONFIG_SCRIPT)
+                 find_library (_path
+                     NAMES "${_file}"
+                     PATHS "${ODBC_UNIXODBC_DIR}"
++                    PATH_SUFFIXES "lib"
+                     NO_DEFAULT_PATH
+                 )
+             else ()

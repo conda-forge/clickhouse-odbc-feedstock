@@ -24,15 +24,13 @@ requirements:
     - poco
     - libtool
     - unixodbc
-  run:
-    - openssl
-    - poco
-    - unixodbc
+    - icu
+    - folly
 
 test:
   commands:
-    - test -f $PREFIX/lib/odbc/libclickhouseodbc${SHLIB_EXT}  # [unix]
-    - test -f $PREFIX/lib/odbc/libclickhouseodbcw${SHLIB_EXT}  # [unix]
+    - test -f $PREFIX/lib/libclickhouseodbc${SHLIB_EXT}  # [unix]
+    - test -f $PREFIX/lib/libclickhouseodbcw${SHLIB_EXT}  # [unix]
 
 about:
   home: https://github.com/yandex/clickhouse-odbc

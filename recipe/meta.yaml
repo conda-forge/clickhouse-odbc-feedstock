@@ -12,7 +12,7 @@ source:
     - 0001-Add-missing-path-suffixes.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:

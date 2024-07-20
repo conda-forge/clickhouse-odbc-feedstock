@@ -12,7 +12,7 @@ source:
     - 0001-Add-missing-path-suffixes.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
 
 requirements:
@@ -21,6 +21,7 @@ requirements:
     - ninja
     - pkg-config
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
     - openssl

@@ -1,5 +1,5 @@
 {% set name = "clickhouse-odbc" %}
-{% set version = "1.2.1.20220905" %}
+{% set version = "1.5.2.20260217" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://github.com/yandex/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: ca8666cbc7af9e5d4670cd05c9515152c34543e4f45e2bc8fa94bee90d724f1b
+  sha256: fd2832bc98c5592681ad58c44ddd1138d4e5549c17194806c23bdddc9ce2dbba
   patches:
     - 0001-Add-missing-path-suffixes.patch
 
 build:
-  number: 5
+  number: 0
   skip: true  # [win]
 
 requirements:

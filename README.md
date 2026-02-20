@@ -5,7 +5,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/clickhouse-odbc
 
 Home: https://github.com/yandex/clickhouse-odbc
 
-Package license: Apache 2.0
+Package license: Apache-2.0
 
 Summary: ODBC driver for ClickHouse
 

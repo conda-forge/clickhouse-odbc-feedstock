@@ -1,0 +1,112 @@
+From c5fff7ce915355b21b7db91552a23a88bbcf9137 Mon Sep 17 00:00:00 2001
+From: "Uwe L. Korn" <uwe.korn@quantco.com>
+Date: Fri, 20 Feb 2026 19:27:44 +0100
+Subject: [PATCH 2/2] libcxx char traits compat
+
+---
+ driver/platform/platform.h | 92 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 92 insertions(+)
+
+diff --git a/driver/platform/platform.h b/driver/platform/platform.h
+index 48fbda3..0e9d8b8 100755
+--- a/driver/platform/platform.h
++++ b/driver/platform/platform.h
+@@ -61,6 +61,98 @@
+ #    include <iodbcext.h>
+ #endif
+ 
++#include <iosfwd>
++
++#if defined(_LIBCPP_VERSION) && _LIBCPP_VERSION >= 190000
++#    include <cstddef>
++#    include <cstring>
++#    include <cwchar>
++#    include <limits>
++
++// libc++ no longer provides these non-standard specializations, but this
++// project still uses std::basic_string for these code-unit types.
++template <typename CharType>
++struct ch_odbc_char_traits_compat {
++    using char_type = CharType;
++    using int_type = unsigned int;
++    using off_type = std::streamoff;
++    using pos_type = std::streampos;
++    using state_type = std::mbstate_t;
++
++    static inline void assign(char_type & c1, const char_type & c2) noexcept {
++        c1 = c2;
++    }
++
++    static inline constexpr bool eq(const char_type c1, const char_type c2) noexcept {
++        return c1 == c2;
++    }
++
++    static inline constexpr bool lt(const char_type c1, const char_type c2) noexcept {
++        return c1 < c2;
++    }
++
++    static inline int compare(const char_type * s1, const char_type * s2, std::size_t n) noexcept {
++        for (std::size_t i = 0; i < n; ++i) {
++            if (lt(s1[i], s2[i])) return -1;
++            if (lt(s2[i], s1[i])) return 1;
++        }
++        return 0;
++    }
++
++    static inline std::size_t length(const char_type * s) noexcept {
++        std::size_t i = 0;
++        while (!eq(s[i], char_type{})) ++i;
++        return i;
++    }
++
++    static inline const char_type * find(const char_type * s, std::size_t n, const char_type & a) noexcept {
++        for (std::size_t i = 0; i < n; ++i) {
++            if (eq(s[i], a)) return s + i;
++        }
++        return nullptr;
++    }
++
++    static inline char_type * move(char_type * s1, const char_type * s2, std::size_t n) noexcept {
++        return static_cast<char_type *>(std::memmove(s1, s2, n * sizeof(char_type)));
++    }
++
++    static inline char_type * copy(char_type * s1, const char_type * s2, std::size_t n) noexcept {
++        return static_cast<char_type *>(std::memcpy(s1, s2, n * sizeof(char_type)));
++    }
++
++    static inline char_type * assign(char_type * s, std::size_t n, char_type a) noexcept {
++        for (std::size_t i = 0; i < n; ++i) s[i] = a;
++        return s;
++    }
++
++    static inline constexpr int_type not_eof(const int_type c) noexcept {
++        return (c == eof()) ? int_type{} : c;
++    }
++
++    static inline constexpr char_type to_char_type(const int_type c) noexcept {
++        return static_cast<char_type>(c);
++    }
++
++    static inline constexpr int_type to_int_type(const char_type c) noexcept {
++        return static_cast<int_type>(c);
++    }
++
++    static inline constexpr bool eq_int_type(const int_type c1, const int_type c2) noexcept {
++        return c1 == c2;
++    }
++
++    static inline constexpr int_type eof() noexcept {
++        return std::numeric_limits<int_type>::max();
++    }
++};
++
++namespace std {
++template <> struct char_traits<signed char> : ::ch_odbc_char_traits_compat<signed char> {};
++template <> struct char_traits<unsigned char> : ::ch_odbc_char_traits_compat<unsigned char> {};
++template <> struct char_traits<unsigned short> : ::ch_odbc_char_traits_compat<unsigned short> {};
++} // namespace std
++#endif
++
+ #if defined(_win_)
+ #    if defined(UNICODE)
+ #        include <sqlucode.h>

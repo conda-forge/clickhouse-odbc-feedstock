@@ -13,6 +13,7 @@ source:
   sha256: ca8666cbc7af9e5d4670cd05c9515152c34543e4f45e2bc8fa94bee90d724f1b
   patches:
     - 0001-Add-missing-path-suffixes.patch
+    - 0002-libcxx-char-traits-compat.patch
 
 build:
   number: 6

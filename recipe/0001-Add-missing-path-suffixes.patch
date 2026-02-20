@@ -1,7 +1,7 @@
-From 30a34fc09995b35ac80da4f152da80479547f563 Mon Sep 17 00:00:00 2001
+From 51c51334f862d271bd761d594214cf6a0ec40f41 Mon Sep 17 00:00:00 2001
 From: "Uwe L. Korn" <uwe.korn@quantco.com>
 Date: Mon, 26 Feb 2024 17:01:13 +0100
-Subject: [PATCH] Add missing path suffixes
+Subject: [PATCH 1/2] Add missing path suffixes
 
 ---
  cmake/Modules/FindUnixODBC.cmake | 2 ++

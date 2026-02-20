@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  name: clickhouse-odbc
+  version: 1.2.1.20220905
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/yandex/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: ca8666cbc7af9e5d4670cd05c9515152c34543e4f45e2bc8fa94bee90d724f1b
+  patches:
+    - 0001-Add-missing-path-suffixes.patch
+
+build:
+  number: 6
+  skip: win
+
+requirements:
+  build:
+    - cmake
+    - ninja
+    - pkg-config
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - ${{ compiler('cxx') }}
+  host:
+    - openssl
+    - poco
+    - libtool
+    - unixodbc
+    - icu
+    - folly
+
+tests:
+  - script:
+      - if: unix
+        then: test -f $PREFIX/lib/libclickhouseodbc${SHLIB_EXT}
+      - if: unix
+        then: test -f $PREFIX/lib/libclickhouseodbcw${SHLIB_EXT}
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: ODBC driver for ClickHouse
+  homepage: https://github.com/yandex/clickhouse-odbc
+  repository: https://github.com/yandex/clickhouse-odbc
+  documentation: http://clickhouse.yandex/
+
+extra:
+  recipe-maintainers:
+    - kszucs
+    - xhochy

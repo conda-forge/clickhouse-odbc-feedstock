@@ -16,7 +16,7 @@ source:
     - 0002-libcxx-char-traits-compat.patch
 
 build:
-  number: 6
+  number: 7
   skip: win
 
 requirements:
@@ -38,10 +38,9 @@ requirements:
 tests:
   - script:
       - if: unix
-        then: test -f $PREFIX/lib/libclickhouseodbc${SHLIB_EXT}
-      - if: unix
-        then: test -f $PREFIX/lib/libclickhouseodbcw${SHLIB_EXT}
-
+        then:
+          - test -f $PREFIX/lib/libclickhouseodbc${SHLIB_EXT}
+          - test -f $PREFIX/lib/libclickhouseodbcw${SHLIB_EXT}
 about:
   license: Apache-2.0
   license_file: LICENSE

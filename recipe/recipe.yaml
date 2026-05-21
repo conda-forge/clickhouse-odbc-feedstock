@@ -16,7 +16,7 @@ source:
     - 0002-libcxx-char-traits-compat.patch
 
 build:
-  number: 8
+  number: 9
   skip: win
 
 requirements:

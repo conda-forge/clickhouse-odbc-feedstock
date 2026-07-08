@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: clickhouse-odbc
-  version: 1.2.1.20220905
+  version: "1.5.4.20260708"
 
 package:
   name: ${{ name|lower }}
@@ -10,13 +10,13 @@ package:
 
 source:
   url: https://github.com/yandex/${{ name }}/archive/v${{ version }}.tar.gz
-  sha256: ca8666cbc7af9e5d4670cd05c9515152c34543e4f45e2bc8fa94bee90d724f1b
+  sha256: 1316973b7b9fffa15d63d81f063c3d9e5f7ce015649320976edc7685f3acfd4d
   patches:
     - 0001-Add-missing-path-suffixes.patch
     - 0002-libcxx-char-traits-compat.patch
 
 build:
-  number: 9
+  number: 0
   skip: win
 
 requirements:
